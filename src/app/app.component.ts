@@ -7,11 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ngapp-complete-guide';
-  activeMenu: string;
   constructor() {
-    this.activeMenu = 'recipe';
-  }
-  onNavLinkClicked(linkName: string) {
-    this.activeMenu = linkName;
   }
 }
