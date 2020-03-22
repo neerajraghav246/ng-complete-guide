@@ -66,8 +66,10 @@ export class AuthComponent implements OnDestroy {
       hostViewContainerRef.clear();
     })
   }
-  
+
   ngOnDestroy() {
-    this.closeSub.unsubscribe();
+    if (this.closeSub) {
+      this.closeSub.unsubscribe();
+    }
   }
 }
