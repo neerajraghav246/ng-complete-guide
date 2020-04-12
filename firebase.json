@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/ngapp-complete-guide",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
