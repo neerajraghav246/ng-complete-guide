@@ -19,7 +19,8 @@ const handleAuthentication = (email: string, userId: string, token: string, expi
             email,
             userId,
             token,
-            expirationDate
+            expirationDate,
+            redirect: true
         }
     );
 }
@@ -98,8 +99,10 @@ export class AuthEffects {
         );
 
     @Effect({ dispatch: false }) authRedirect = this.actions$
-        .pipe(ofType(authActions.AUTHENTICATE_SUCCESS), tap(() => {
-            this.router.navigate(['/']);
+        .pipe(ofType(authActions.AUTHENTICATE_SUCCESS), tap((actionResponse:authActions.AuthenticateSuccess) => {
+            if(actionResponse.payload.redirect){
+                this.router.navigate(['/']);
+            }
         }));
 
     @Effect({ dispatch: false }) authLogout = this.actions$
@@ -124,7 +127,8 @@ export class AuthEffects {
                             email: loadedUser.email,
                             userId: loadedUser.id,
                             token: loadedUser.token,
-                            expirationDate: new Date(userDataObject._tokenExpirationDate)
+                            expirationDate: new Date(userDataObject._tokenExpirationDate),
+                            redirect: false
                         });
                 }
                 return { type: 'DUMMY' }
